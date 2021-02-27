@@ -12,6 +12,20 @@ type Props = {
 
 type WorkoutPhase = "GET-READY" | "EXERCISE" | "REST";
 
+// Generate array values for every minute until 60 minutes. Kinda hardcoded, but
+// nobody should do interval training with over 60min intervals :shrug:
+const ttsSeconds = [
+  1,
+  2,
+  3,
+  4,
+  5,
+  30,
+  ...Array(60)
+    .fill(0)
+    .map((_, i) => (i + 1) * 60),
+];
+
 const WorkoutHandler: React.FC<Props> = (props) => {
   const { config, onFinish } = props;
 
@@ -40,7 +54,11 @@ const WorkoutHandler: React.FC<Props> = (props) => {
       {phase === "GET-READY" && (
         <>
           <h1>GET READY</h1>
-          <Countdown durationInSeconds={10} onFinish={onGetReadyFinished} />
+          <Countdown
+            durationInSeconds={10}
+            onFinish={onGetReadyFinished}
+            ttsSeconds={ttsSeconds}
+          />
         </>
       )}
       {phase === "EXERCISE" && (
@@ -51,6 +69,7 @@ const WorkoutHandler: React.FC<Props> = (props) => {
           <Countdown
             durationInSeconds={config.exerciseInSeconds}
             onFinish={onExerciseFinished}
+            ttsSeconds={ttsSeconds}
           />
         </>
       )}
@@ -60,6 +79,7 @@ const WorkoutHandler: React.FC<Props> = (props) => {
           <Countdown
             durationInSeconds={config.restInSeconds}
             onFinish={onRestFinished}
+            ttsSeconds={ttsSeconds}
           />
         </>
       )}
