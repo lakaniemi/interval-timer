@@ -30,7 +30,7 @@ const Countdown: React.FC<Props> = (props) => {
   const secondsLeft = Math.floor((timeLeft - minutesLeft * 60000) / 1000);
 
   return (
-    <div>
+    <div className="countdown">
       {minutesLeft}:{`${secondsLeft}`.padStart(2, "0")}
     </div>
   );

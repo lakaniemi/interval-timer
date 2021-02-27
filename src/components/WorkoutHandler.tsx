@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import "./WorkoutHandler.css";
+
 import { WorkoutConfiguration } from "./Configurator";
 import Countdown from "./Countdown";
 
@@ -7,12 +10,12 @@ type Props = {
   onFinish: () => void;
 };
 
-type WorkoutPhase = "GET_READY" | "EXERCISE" | "REST";
+type WorkoutPhase = "GET-READY" | "EXERCISE" | "REST";
 
 const WorkoutHandler: React.FC<Props> = (props) => {
   const { config, onFinish } = props;
 
-  const [phase, setPhase] = useState<WorkoutPhase>("GET_READY");
+  const [phase, setPhase] = useState<WorkoutPhase>("GET-READY");
   const [currentRepetition, setCurrentRepetition] = useState(1);
 
   const onGetReadyFinished = () => {
@@ -33,13 +36,18 @@ const WorkoutHandler: React.FC<Props> = (props) => {
   };
 
   return (
-    <div>
-      {phase === "GET_READY" && (
-        <Countdown durationInSeconds={10} onFinish={onGetReadyFinished} />
+    <div className={`workout-handler-container phase-${phase.toLowerCase()}`}>
+      {phase === "GET-READY" && (
+        <>
+          <h1>GET READY</h1>
+          <Countdown durationInSeconds={10} onFinish={onGetReadyFinished} />
+        </>
       )}
       {phase === "EXERCISE" && (
         <>
-          <div>Exercise</div>
+          <h1>
+            EXERCISE {currentRepetition}/{config.numberOfRepetitions}
+          </h1>
           <Countdown
             durationInSeconds={config.exerciseInSeconds}
             onFinish={onExerciseFinished}
@@ -48,8 +56,7 @@ const WorkoutHandler: React.FC<Props> = (props) => {
       )}
       {phase === "REST" && (
         <>
-          <div>Rest</div>
-
+          <h1>REST</h1>
           <Countdown
             durationInSeconds={config.restInSeconds}
             onFinish={onRestFinished}

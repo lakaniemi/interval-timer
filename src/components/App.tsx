@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import Configurator, { WorkoutConfiguration } from "./Configurator";
 import WorkoutCompleted from "./WorkoutCompleted";
 import WorkoutHandler from "./WorkoutHandler";
@@ -21,7 +20,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="app-container">
+    <div>
       {appState.status === "CONFIG" && (
         <Configurator onStart={onConfigurationFinished} />
       )}

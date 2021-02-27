@@ -1,0 +1,25 @@
+.workout-handler-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown {
+  font-size: 25vw;
+}
+
+.phase-exercise {
+  background: rgb(0, 255, 0);
+}
+
+.phase-get-ready,
+.phase-rest {
+  background: rgb(255, 255, 0);
+}
+
+h1 {
+  font-size: 4vw;
+}
